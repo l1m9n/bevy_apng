@@ -101,17 +101,17 @@ impl AssetLoader for ApngLoader {
         while let Ok(info) = decoder.next_frame(&mut buf) {
             let width = info.width;
             let height = info.height;
-            let bytes = buf[..info.buffer_size()].to_vec();
+            let pixels = buf[..info.buffer_size()].to_vec();
 
             let frame_control = &decoder.info().frame_control.unwrap();
 
             let ms = (frame_control.delay_num as f32) / (frame_control.delay_den as f32);
-            let duration = Duration::from_secs_f32(ms.max(1.));
+            let duration = Duration::from_secs_f32(ms.max(0.001));
 
             frames.push(ApngFrame {
                 width,
                 height,
-                pixels: bytes,
+                pixels,
                 duration,
             });
         }
