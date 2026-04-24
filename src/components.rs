@@ -33,6 +33,22 @@ pub struct ApngNode {
     pub handle: Handle<ApngAsset>,
 }
 
+macro_rules! add_new {
+    () => {
+        pub fn new(handle: Handle<ApngAsset>) -> Self {
+            Self { handle }
+        }
+    };
+}
+
+impl ApngSprite {
+    add_new!();
+}
+
+impl ApngNode {
+    add_new!();
+}
+
 #[derive(Component)]
 pub struct ApngDespawnable;
 
@@ -60,7 +76,7 @@ pub enum ApngLoaderError {
     Io(#[from] std::io::Error),
 
     #[error("could not decode asset: {0}")]
-    Decode(#[from] png::DecodingError)
+    Decode(#[from] png::DecodingError),
 }
 
 impl AssetLoader for ApngLoader {
