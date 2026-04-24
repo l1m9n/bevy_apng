@@ -15,7 +15,7 @@ impl Plugin for ApngPlugin {
                     crate::systems::initialize_gifs,
                     crate::systems::animate_apngs,
                     crate::systems::despawn_apngs,
-                ),
+                ).chain(),
             );
     }
 }
