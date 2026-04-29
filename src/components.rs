@@ -52,11 +52,20 @@ impl ApngNode {
 #[derive(Component)]
 pub struct ApngDespawnable;
 
-#[derive(Debug, Asset, TypePath, Clone)]
+#[derive(Default, Debug, Asset, TypePath, Clone)]
 pub struct ApngAsset {
     pub frames: Vec<ApngFrame>,
     pub handles: Vec<Handle<Image>>,
     pub times: Option<u32>,
+    pub(crate) state: ApngLoadState,
+}
+
+#[derive(Debug, Default, Clone, PartialEq, Eq)]
+pub enum ApngLoadState {
+    #[default]
+    NotLoaded,
+    Loading,
+    Loaded,
 }
 
 #[derive(Debug, Clone)]
@@ -125,8 +134,8 @@ impl AssetLoader for ApngLoader {
 
         let asset = ApngAsset {
             frames,
-            handles: vec![],
             times,
+            ..default()
         };
         Ok(asset)
     }

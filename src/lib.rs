@@ -1,7 +1,12 @@
 pub mod components;
+pub mod messages;
 pub mod plugin;
 pub mod systems;
-pub mod messages;
 
-pub use components::{ApngAsset, ApngLoader, ApngPlayer, ApngSprite, ApngNode, ApngDespawnable};
-pub use plugin::ApngPlugin;
+pub mod prelude {
+    pub use crate::components::{
+        ApngAsset, ApngDespawnable, ApngLoader, ApngNode, ApngPlayer, ApngSprite, ApngLoadState,
+    };
+    // pub use crate::messages::ApngInitMessage;
+    pub use crate::plugin::ApngPlugin;
+}

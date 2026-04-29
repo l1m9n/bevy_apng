@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::{ApngLoader, components::ApngAsset, messages::ApngDespawnMessage};
+use crate::{prelude::*, messages::ApngDespawnMessage};
 
 pub struct ApngPlugin;
 
@@ -12,7 +12,7 @@ impl Plugin for ApngPlugin {
             .add_systems(
                 Update,
                 (
-                    crate::systems::initialize_gifs,
+                    crate::systems::initialize_apngs,
                     crate::systems::animate_apngs,
                     crate::systems::despawn_apngs,
                 ).chain(),
