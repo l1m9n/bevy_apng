@@ -141,6 +141,6 @@ impl AssetLoader for ApngLoader {
     }
 
     fn extensions(&self) -> &[&str] {
-        &["gif"]
+        &["png"]
     }
 }
